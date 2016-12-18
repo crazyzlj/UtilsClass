@@ -1,10 +1,9 @@
 /*!
- * \ingroup util
  * \brief Utility functions to handle numeric, string and file
  * \author Junzhi Liu, LiangJun Zhu
- * \version 1.1
+ * \version 1.2
  * \date Jul. 2010
- *
+ * \revised Dec. 2016
  * 
  */
 #pragma once
@@ -13,7 +12,7 @@
 #include <vector>
 #include <algorithm>
 #include <stdio.h>
-#include "text.h"
+//#include "text.h"
 #include <cmath>
 #include <sstream>
 #include <iostream>
@@ -21,7 +20,7 @@
 #include <cmath>
 #include <fstream>
 #include <cstring>
-#ifndef linux
+#ifdef windows
 #define _WINSOCKAPI_    // stops windows.h including winsock.h
 #include <windows.h>
 #include <winsock2.h>
@@ -44,27 +43,51 @@ using namespace std;
  * \def NODATA_VALUE
  * \brief NODATA value
  */
+#ifndef NODATA_VALUE
 #define NODATA_VALUE    -9999.0f
-// TODO, replace NODATA by NODATA_VALUE thoroughly
-#define NODATA          -99.0f
+#endif
 const float MISSINGFLOAT = -1 * FLT_MAX;
-const float MAXFLOAT  = FLT_MAX;
+const float MAXIMUMFLOAT  = FLT_MAX;
+#ifndef PATH_MAX
+#define PATH_MAX 1024
+#endif
 /**
  * \def ZERO
  * \brief zero value used in numeric calculation
  */
+#ifndef UTIL_ZERO
 #define UTIL_ZERO                1.0e-6f
+#endif
 /**
  * \def PI
  * \brief PI value used in numeric calculation
  */
+#ifndef PI
 #define PI                                3.14159265358979323846f
+#endif
 /**
  * \def MINI_SLOPE
  * \brief Minimum slope gradient
  */
+#ifndef MINI_SLOPE
 #define MINI_SLOPE            0.0001f
+#endif
 
+
+#ifdef windows
+#define Tag_ModuleDirectoryName "\\"
+#define SEP "\\"
+#define Tag_ModuleExt ".dll" /// TODO, rename to Tag_DyLib
+#elif defined linux
+#define Tag_ModuleDirectoryName "/"
+#define SEP "/"
+#define Tag_So "lib"
+#define Tag_ModuleExt ".so"
+#elif defined macos
+#define Tag_ModuleDirectoryName "/"
+#define SEP "/"
+#define Tag_So "dylib"
+#endif
 /*!
  * \ingroup util
  * \enum LayeringMethod
@@ -73,9 +96,9 @@ const float MAXFLOAT  = FLT_MAX;
 enum LayeringMethod
 {
     /// layering-from-source method
-            UP_DOWN,
+    UP_DOWN,
     /// layering-from-outlet method
-            DOWN_UP
+    DOWN_UP
 };
 
 /*!
@@ -413,20 +436,20 @@ extern string &trim(string &s);
 #define stringcpy strcpy
 #endif
 
-#ifndef linux
+#ifdef MSVC
 #define strprintf sprintf_s
 #define StringTok strtok_s
-#ifdef MSVC
 #ifndef max
 #define max(a, b)  (((a) > (b)) ? (a) : (b))
 #endif
 #ifndef min
 #define min(a, b)  (((a) < (b)) ? (a) : (b))
 #endif
-#endif
 #else
 #define strprintf snprintf
 #define StringTok strtok_r
+#endif
+#ifndef windows
 /*!
  * \brief Copy file in linux
  *

@@ -1,7 +1,6 @@
 /*!
  * \brief Utility functions to handle numeric, string and file
  *
- * Utility functions for all SEIMS modules
  *
  * \author Junzhi Liu
  * \version 1.0
@@ -31,7 +30,7 @@ float Expo(float xx)
 
 int FindFiles(const char *lpPath, const char *expression, vector<string> &vecFiles)
 {
-#ifndef linux
+#ifdef windows
 	char szFind[MAX_PATH];
 	stringcpy(szFind, lpPath);
 	stringcat(szFind, "\\");
@@ -66,7 +65,7 @@ int FindFiles(const char *lpPath, const char *expression, vector<string> &vecFil
 
 		string filename(ptr->d_name);
 		//cout << filename<<endl;
-		int n = filename.length();
+		int n = (int)filename.length();
 		string ext = filename.substr(n-4, 4);
 		//cout << ext << "\t" << expression << endl;
 		if(StringMatch(ext, expression) || StringMatch(expression, ".*") 
@@ -96,10 +95,7 @@ bool FloatEqual(float f1, float f2)
 string GetAppPath()
 {
     string RootPath;
-#ifndef PATH_MAX
-#define PATH_MAX 1024
-#endif
-#ifndef linux
+#ifdef windows
     TCHAR buffer[PATH_MAX];
     GetModuleFileName(NULL, buffer, PATH_MAX);
     RootPath = string((char *) buffer);
@@ -169,7 +165,7 @@ string GetUpper(string str)
 
 void LocalTime(time_t date, struct tm *t)
 {
-#ifndef linux
+#ifdef windows
     localtime_s(t, &date);
 #else
     localtime_r(&date, t);
@@ -263,7 +259,7 @@ void StatusMessage(const char *msg)
 
 bool StrEqualIgnoreCase(const char *a, const char *b)
 {
-#ifndef linux
+#ifdef windows
     return _stricmp(a, b) == 0;
 #else
     return strcasecmp(a, b) == 0;
@@ -293,7 +289,7 @@ string &trim(string &s)
 
 double TimeCounting()
 {
-#ifndef linux
+#ifdef windows
 	LARGE_INTEGER li;
 	if (QueryPerformanceFrequency(&li)) /// CPU supported
 	{
@@ -310,21 +306,6 @@ double TimeCounting()
 	return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.;
 #endif
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //bool CopyFile (const char* srcFileName, const char* destFileName)
 //{
@@ -343,7 +324,7 @@ double TimeCounting()
 //    return true; // file copied successfully
 //}
 
-#ifdef linux
+#ifndef windows
 int copyfile_linux(const char* srcfile, const char* dstfile)
 {
     struct stat file;

@@ -1,12 +1,11 @@
 /*!
- * \ingroup util
  * \brief Utilities class to handle string, date time and file
  *
  *
- * \author Junzhi Liu
- * \version 1.1
+ * \author Junzhi Liu, Liangjun Zhu
+ * \version 1.2
  * \date Jul. 2010
- *
+ * \revised Dec. 2016
  * 
  */
 
@@ -21,7 +20,7 @@
 #include <time.h>
 #include <fstream>
 #include <ctime>
-#ifndef linux
+#ifdef windows
 #include <io.h>
 #define _WINSOCKAPI_    // stops windows.h including winsock.h
 #include <windows.h>
@@ -34,10 +33,7 @@ using namespace std;
 
 /*!
  * \class utils
- * \ingroup util
  * \brief utils class to handle string, date time and file
- *
- *
  *
  */
 class utils
@@ -138,7 +134,7 @@ public:
     static vector<string> SplitString(string item, char delimiter);
 
     /*
-     * \brief Get numeric values by spliting the given string based on the given delimiter
+     * \brief Get numeric values by splitting the given string based on the given delimiter
      */
     template<typename T>
     vector<T> SplitStringForValues(string item, char delimiter)
@@ -152,12 +148,12 @@ public:
     }
 
     /*
-     * \brief Get int values by spliting the given string based on the given delimiter
+     * \brief Get int values by splitting the given string based on the given delimiter
      */
     static vector<int> SplitStringForInt(string item, char delimiter);
 
     /*
-     * \brief Get float values by spliting the given string based on the given delimiter
+     * \brief Get float values by splitting the given string based on the given delimiter
      */
     static vector<float> SplitStringForFloat(string item, char delimiter);
 
@@ -178,4 +174,13 @@ public:
     static void TrimSpaces(string &str);
 	
 };
+
+
+static int daysOfMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+/*!
+ *\def LEAPYEAR(y)
+ *\brief A macro that returns if \a y is a leap year.
+ */
+#define LEAPYEAR(y) ((y % 4) == 0 && ((y % 100) != 0 || (y % 400) == 0))
 

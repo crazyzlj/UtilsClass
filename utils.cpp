@@ -1,18 +1,4 @@
-/*!
- * \brief methods of utils class
- *
- * Implementation of the methods for the utils class
- *
- * \author Junzhi Liu
- * \version 1.1
- * \date Jul. 2010
- *
- * 
- */
-
 #include "utils.h"
-
-using namespace std;
 
 utils::utils(void)
 {
@@ -22,18 +8,11 @@ utils::~utils(void)
 {
 }
 
-static int daysOfMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-/*!
- *\def LEAPYEAR(y)
- *\brief A macro that returns if \a y is a leap year.
- */
-#define LEAPYEAR(y) ((y % 4) == 0 && ((y % 100) != 0 || (y % 400) == 0))
 
 string utils::ConvertToString(const time_t *date)
 {
     struct tm dateInfo;
-#ifndef linux
+#ifdef windows
     localtime_s(&dateInfo, date);
 #else
     localtime_r(date, &dateInfo);
@@ -50,7 +29,7 @@ string utils::ConvertToString(const time_t *date)
 string utils::ConvertToString2(const time_t *date)
 {
     struct tm dateInfo;
-#ifndef linux
+#ifdef windows
     localtime_s(&dateInfo, date);
 #else
     localtime_r(date, &dateInfo);
@@ -207,7 +186,7 @@ time_t utils::ConvertYMDToTime(int &year, int &month, int &day)
 
 bool utils::FileExists(string FileName)
 {
-#ifndef linux
+#ifdef windows
     struct _finddata_t fdt;
     intptr_t ptr = _findfirst(FileName.c_str(), &fdt);
     bool found = (ptr != -1);
@@ -224,7 +203,7 @@ bool utils::FileExists(string FileName)
 int utils::GetDateInfoFromTimet(time_t *t, int *year, int *month, int *day)
 {
     struct tm dateInfo;
-#ifndef linux
+#ifdef windows
     localtime_s(&dateInfo, t);
 #else
     localtime_r(t, &dateInfo);
@@ -249,7 +228,7 @@ void utils::Log(string msg)
     time_t now;
     char buffer[32];
     time(&now);
-#ifndef linux
+#ifdef windows
     localtime_s(&timeptr, &now);
     asctime_s(buffer, 32, &timeptr);
 #else
