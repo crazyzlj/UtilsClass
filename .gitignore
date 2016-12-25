@@ -29,7 +29,7 @@
 *.app
 bin
 build
-cmake-build-debug
+cmake-build*
 
 # IDE related
 .idea/
