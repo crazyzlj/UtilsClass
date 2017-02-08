@@ -30,4 +30,3 @@ string ModelException::toString()
 
     return descri;
 }
-

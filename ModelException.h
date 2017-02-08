@@ -4,7 +4,8 @@
  * \version 1.1
  * \date Jun. 2010
  */
-#pragma once
+#ifndef MODEL_EXCEPTION
+#define MODEL_EXCEPTION
 
 #include <exception>
 #include <string>
@@ -14,11 +15,7 @@ using namespace std;
 /*!
  * \ingroup util
  * \class ModelException
- *
  * \brief Print the exception message
- *
- *
- *
  */
 class ModelException :
         public exception
@@ -44,13 +41,13 @@ public:
      * \param[out] \a char* error information
      */
     const char *what() const throw()
-    {
-        string descri = "\n";
-        descri = "Class:" + m_className + "\n";
-        descri += "Function:" + m_functionName + "\n";
-        descri += "Message:" + m_msg;
+	{
+		string descri = "\n";
+		descri = "Class:" + m_className + "\n";
+		descri += "Function:" + m_functionName + "\n";
+		descri += "Message:" + m_msg;
 
-        return descri.c_str();
+		return descri.c_str();
     }
 
 private:
@@ -58,4 +55,4 @@ private:
     string m_functionName;
     string m_msg;
 };
-
+#endif
