@@ -1,3 +1,7 @@
+branches:
+  only:
+  - master
+  - /v\d+\.\d+[a-z]/
 matrix:
   fast_finish: true
   include:
