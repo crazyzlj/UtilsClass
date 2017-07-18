@@ -36,10 +36,9 @@ artifacts:
   type: zip
 deploy:
 - provider: GitHub
-  tag: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
   auth_token:
-    secure: ipKxCyA9IvXnX15s1Pv+F8G3KMeM+nkI0mSj9Ci2X61lYEt8096gqrJrUwCQYimqBABBAYf8acycwZN/GUVGsB6XO0xY2eZIJPec4aHrNaI=
-  artifact: utils_win64bit.zip
+    secure: 0QgJRUirN4LatLYsIWz/ZmkyTeATUswoDFNPc63w025BUPh62ttH6Vkoe1vpZ70x
+  artifact: utils_win64bit.zip,utils_win32bit.zip
   force_update: true
   on:
     appveyor_repo_tag: true
