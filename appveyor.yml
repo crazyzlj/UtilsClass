@@ -28,10 +28,10 @@ build_script:
   - cd ..
   - ps: "ls"
 artifacts:
-- path: C:\zhulj\utilsclass\utils_win64bit
+- path: utils_win64bit
   name: utils_win64bit
   type: zip
-- path: C:\zhulj\utilsclass\utils_win32bit
+- path: utils_win32bit
   name: utils_win32bit
   type: zip
 deploy:
