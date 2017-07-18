@@ -13,5 +13,5 @@ cd ..
 zip -r utils_linux_gcc.zip utils_linux_gcc
 # list all executable file
 ls
-cd bin
+cd utils_linux_gcc
 ls

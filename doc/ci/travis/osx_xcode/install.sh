@@ -13,5 +13,5 @@ cd ..
 zip -r utils_mac_clang.zip utils_mac_clang
 # list all executable file
 ls
-cd bin
+cd utils_mac_clang
 ls
