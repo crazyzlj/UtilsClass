@@ -42,5 +42,4 @@ deploy:
   artifact: utils_win64bit.zip
   force_update: true
   on:
-    branch: master
     appveyor_repo_tag: true
