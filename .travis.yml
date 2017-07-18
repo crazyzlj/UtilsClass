@@ -51,3 +51,4 @@ deploy:
   on:
     repo: lreis2415/UtilsClass
     tags: true
+    all_branches: true
