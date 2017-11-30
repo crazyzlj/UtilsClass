@@ -8,6 +8,7 @@ file(GLOB TEST_SRC_FILES *.cpp)
 add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
 target_link_libraries(${PROJECT_TEST_NAME} gtest gtest_main utilsclass)
 
+INSTALL(TARGETS ${PROJECT_TEST_NAME} DESTINATION ${INSTALL_DIR})
 ###
 ## This is so you can do 'make test' to see all your tests run, instead of
 ## manually running the executable runUnitTests to see those specific tests.

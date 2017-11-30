@@ -66,6 +66,11 @@ IF(NOT CMAKE_SIZEOF_VOID_P GREATER 0)
             )
 ENDIF()
 
+# Global flag to cause add_library to create shared libraries if on, otherwise static library.
+option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+# libraries built with hunter link against the dynamic CRT on windows
+option(BUILD_WITH_STATIC_CRT "Build against dynamic CRT on windows." ON)
+
 ### Detect compiler and target platform architecture.
 SET(WITH_OPENMP 1)
 SET(ENABLE_CXX11 1)
