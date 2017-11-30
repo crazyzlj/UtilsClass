@@ -106,12 +106,14 @@ else ()
 endif ()
 
 ### UtilsClass library
-file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_library(utilsclass ${SOURCE_FILES})
-
+if (RUNCOV STREQUAL 1)
+    set_target_properties(utilsclass PROPERTIES LINK_FLAGS "-coverage -lgcov")
+endif()
 ### unittest based on gtest/gmock, which is optional.
 IF (UNITTEST STREQUAL 1)
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
     ### Download and compile googletest
     include(DownloadProject)
     download_project(PROJ                googletest

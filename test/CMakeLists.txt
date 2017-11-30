@@ -17,6 +17,7 @@ add_test(NAME UnitTests_Utils
 if (RUNCOV STREQUAL 1)
     include(CodeCoverage)
     APPEND_COVERAGE_COMPILER_FLAGS()
+    set(COVERAGE_EXCLUDES 'test/*' '*test/*')
     setup_target_for_coverage(NAME UnitTestCoverage
                               EXECUTABLE UnitTests_Utils
                               DEPENDENCIES UnitTests_Utils)
