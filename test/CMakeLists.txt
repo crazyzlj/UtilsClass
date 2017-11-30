@@ -3,21 +3,21 @@
 ##############
 enable_testing()
 
-set(PROJECT_TEST_NAME utilsclass_ut_exec)
 file(GLOB TEST_SRC_FILES *.cpp)
-add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
-target_link_libraries(${PROJECT_TEST_NAME} gtest gtest_main utilsclass)
+add_executable(UnitTests_Utils ${TEST_SRC_FILES})
+target_link_libraries(UnitTests_Utils gtest gtest_main utilsclass)
 
-INSTALL(TARGETS ${PROJECT_TEST_NAME} DESTINATION ${INSTALL_DIR})
+INSTALL(TARGETS UnitTests_Utils DESTINATION ${INSTALL_DIR})
 ###
 ## This is so you can do 'make test' to see all your tests run, instead of
 ## manually running the executable runUnitTests to see those specific tests.
-add_test(UnitTests ${PROJECT_TEST_NAME})
+add_test(NAME UnitTests_Utils
+         COMMAND UnitTests_Utils)
 
 if (RUNCOV STREQUAL 1)
     include(CodeCoverage)
     APPEND_COVERAGE_COMPILER_FLAGS()
-    setup_target_for_coverage(NAME gcov_utilsclass
-                              EXECUTABLE ${PROJECT_TEST_NAME}
-                              DEPENDENCIES ${PROJECT_TEST_NAME})
+    setup_target_for_coverage(NAME UnitTestCoverage
+                              EXECUTABLE UnitTests_Utils
+                              DEPENDENCIES UnitTests_Utils)
 endif ()

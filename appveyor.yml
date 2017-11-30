@@ -22,4 +22,4 @@ build_script:
   - cd ..
   - ps: "ls"
   # run unittest
-  - C:\zhulj\utilsclass\utils_win64bit\utilsclass_ut_exec.exe
+  - C:\zhulj\utilsclass\utils_win64bit\UnitTests_Utils.exe
