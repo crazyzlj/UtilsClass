@@ -7,4 +7,4 @@ Selected build environments:
 + Linux(Ubuntu trusty)-GCC-4.8: [![Build Status](http://badges.herokuapp.com/travis/lreis2415/UtilsClass?branch=master&env=BUILD_NAME=linux_gcc48&label=linux_gcc48)](https://travis-ci.org/lreis2415/UtilsClass)
 + macOS-Clang-7.3: [![Build Status](http://badges.herokuapp.com/travis/lreis2415/UtilsClass?branch=master&env=BUILD_NAME=osx_xcode&label=osx_clang)](https://travis-ci.org/lreis2415/UtilsClass)
 
-Code coverage: 
+Code coverage: [![codecov](https://codecov.io/gh/lreis2415/UtilsClass/branch/master/graph/badge.svg)](https://codecov.io/gh/lreis2415/UtilsClass)
