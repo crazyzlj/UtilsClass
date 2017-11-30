@@ -1,6 +1,6 @@
 #include "ModelException.h"
 
-ModelException::ModelException(string& className, string& functionName, string& msg) {
+ModelException::ModelException(string className, string functionName, string msg) {
     exception();
     m_className = className;
     m_functionName = functionName;

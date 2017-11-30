@@ -23,10 +23,10 @@ public:
      * \brief Constructor
      * \param[in] className, functionName, msg \a string
      */
-    ModelException(string& className, string& functionName, string& msg);
+    ModelException(string className, string functionName, string msg);
 
     //! Destructor (void)
-    ~ModelException() throw() override = default;
+    ~ModelException() throw() override {};
 
     /*!
      * \brief Construct error information (string version)

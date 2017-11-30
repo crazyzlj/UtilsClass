@@ -83,6 +83,9 @@ IF(MSVC)
     INCLUDE(CRTLinkage)
 ENDIF(MSVC)
 
+### Find packages.
+INCLUDE(FindPackages)
+
 ### OS platform.
 if (WIN32)
     add_definitions(-Dwindows)
