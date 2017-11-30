@@ -109,6 +109,7 @@ endif ()
 file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_library(utilsclass ${SOURCE_FILES})
 if (RUNCOV STREQUAL 1)
+    set_target_properties(utilsclass PROPERTIES COMPILE_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     set_target_properties(utilsclass PROPERTIES LINK_FLAGS "-coverage -lgcov")
 endif()
 ### unittest based on gtest/gmock, which is optional.
