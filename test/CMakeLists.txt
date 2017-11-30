@@ -17,5 +17,7 @@ add_test(UnitTests ${PROJECT_TEST_NAME})
 if (RUNCOV STREQUAL 1)
     include(CodeCoverage)
     APPEND_COVERAGE_COMPILER_FLAGS()
-    setup_target_for_coverage(NAME gcov_utilsclass EXECUTABLE ${PROJECT_TEST_NAME})
+    setup_target_for_coverage(NAME gcov_utilsclass
+                              EXECUTABLE ${PROJECT_TEST_NAME}
+                              DEPENDENCIES ${PROJECT_TEST_NAME})
 endif ()
