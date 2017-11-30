@@ -11,10 +11,10 @@ double utilsTime::TimeCounting() {
         double PCFreq = 0.;
         PCFreq = double(li.QuadPart);
         QueryPerformanceCounter(&li);
-        return (double)li.QuadPart / PCFreq; // seconds
+        return (double) li.QuadPart / PCFreq; // seconds
+    } else {
+        return (double) clock() / CLK_TCK;
     }
-    else
-        return (double)clock() / CLK_TCK;
 #else
     struct timeval tv;
     gettimeofday(&tv, nullptr);
@@ -77,7 +77,7 @@ string utilsTime::ConvertToString2(const time_t *date) {
     return s;
 }
 
-time_t utilsTime::ConvertToTime(const string& strDate, string const &format, bool includeHour) {
+time_t utilsTime::ConvertToTime(const string &strDate, string const &format, bool includeHour) {
     struct tm *timeinfo;
     time_t t(0);
     if (utilsString::StringMatch(strDate, "")) {
@@ -452,12 +452,13 @@ int utilsFileIO::FindFiles(const char *lpPath, const char *expression, vector<st
 
     WIN32_FIND_DATA findFileData;
     HANDLE hFind = ::FindFirstFile(szFind, &findFileData);
-    if (INVALID_HANDLE_VALUE == hFind)
+    if (INVALID_HANDLE_VALUE == hFind) {
         return -1;
-    do
-    {
-        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+    }
+    do {
+        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
             continue;
+        }
 
         char fullpath[MAX_PATH];
         stringcpy(fullpath, lpPath);
@@ -500,28 +501,27 @@ int utilsFileIO::FindFiles(const char *lpPath, const char *expression, vector<st
     return 0;
 }
 
-bool utilsFileIO::DirectoryExists(const string& dirpath) {
+bool utilsFileIO::DirectoryExists(const string &dirpath) {
 #ifdef windows
     if (::GetFileAttributes(dirpath.c_str()) == INVALID_FILE_ATTRIBUTES) {
 #else
-    if (access(dirpath.c_str(), F_OK) != 0) {
+        if (access(dirpath.c_str(), F_OK) != 0) {
 #endif /* windows */
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }
 
-bool utilsFileIO::CleanDirectory(const string& dirpath) {
-    try{
+bool utilsFileIO::CleanDirectory(const string &dirpath) {
+    try {
         if (utilsFileIO::DirectoryExists(dirpath)) { /// empty the directory
             vector<string> existedFiles;
             utilsFileIO::FindFiles(dirpath.c_str(), "*.*", existedFiles);
-            for (auto it = existedFiles.begin(); it != existedFiles.end(); ++it)
+            for (auto it = existedFiles.begin(); it != existedFiles.end(); ++it) {
                 remove((*it).c_str());
-        } 
-        else { /// create new directory
+            }
+        } else { /// create new directory
 #ifdef windows
             LPSECURITY_ATTRIBUTES att = nullptr;
             ::CreateDirectory(dirpath.c_str(), att);
@@ -585,8 +585,9 @@ string utilsFileIO::GetCoreFileName(string const &fullFileName) {
 
     string::size_type end = fullFileName.find_last_of(".");
 
-    if (end == string::npos)
+    if (end == string::npos) {
         end = fullFileName.length();
+    }
 
     return fullFileName.substr(start + 1, end - start - 1);
 }
@@ -619,7 +620,7 @@ string utilsFileIO::GetPathFromFullName(string const &fullFileName) {
     return fullFileName.substr(0, i + 1);
 }
 
-bool utilsFileIO::LoadPlainTextFile(const string& filepath, vector<string>& contentStrs) {
+bool utilsFileIO::LoadPlainTextFile(const string &filepath, vector<string> &contentStrs) {
     bool bStatus = false;
     ifstream myfile;
     string line;
