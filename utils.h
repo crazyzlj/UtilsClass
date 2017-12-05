@@ -29,6 +29,7 @@
 /// string
 #include <cstring>
 /// IO stream
+#include <cstdlib>
 #include <cstdio>
 #include <sstream>
 #include <iostream>
@@ -611,15 +612,32 @@ public:
     * \brief Check the given directory path is exists or not.
     */
     static bool DirectoryExists(const string &dirpath);
+
     /*!
      * \brief Clean a directory if exists, otherwise create it.
      */
     static bool CleanDirectory(const string &dirpath);
+
+    /*!
+     * \brief Delete a directory if exists.
+     * \refer Windows: https://stackoverflow.com/questions/734717/how-to-delete-a-folder-in-c
+     *        Linux: https://www.linuxquestions.org/questions/programming-9/deleting-a-directory-using-c-in-linux-248696/
+     */
+    static bool DeleteDirectory(const string &dirpath, bool delSubdirs = true);
     /*!
      * \brief Get the root path of the current executable file
      * \return \a string root path
      */
     static string GetAppPath();
+
+    /*!
+     * \brief Return the absolute file path from a given file path
+     *
+     * \param[in] fullFileName
+     * \return absolutePath
+     * \sa GetPathFromFullName
+     */
+    static string GetAbsolutePath(string const &fullFileName);
 
     /*!
      * \brief Return the file name from a given file's path
