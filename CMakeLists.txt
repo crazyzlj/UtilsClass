@@ -129,3 +129,10 @@ IF (UNITTEST STREQUAL 1)
     include_directories("${gtest_SOURCE_DIR}/include" "${gmock_SOURCE_DIR}/include")
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test)
 ENDIF ()
+
+### Copy test data to build directory.
+if (MSVC)
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test)
+else()
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+endif ()
