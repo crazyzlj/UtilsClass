@@ -3,7 +3,8 @@
 set -e
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DUNITTEST=1 ..
+cmake -DCMAKE_BUILD_TYPE=Debug -DUNITTEST=1 ..
 make
+./test/UnitTests_Utils
 cd ..
 ls
