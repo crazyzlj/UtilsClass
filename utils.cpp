@@ -714,10 +714,8 @@ string utilsFileIO::ReplaceSuffix(string const &fullFileName, string const &newS
 string utilsFileIO::GetPathFromFullName(string const &fullFileName) {
     string abspath = utilsFileIO::GetAbsolutePath(fullFileName);
     string::size_type i = abspath.find_last_of(SEP);
-//    if (fullFileName.find_last_of("/") != string::npos) {
-//        i = fullFileName.find_last_of("/");
-//    }
     if (i == string::npos) {
+        cout << "No valid path in " << fullFileName << ", please check!" << endl;
         return "";
     }
     return abspath.substr(0, i + 1);
